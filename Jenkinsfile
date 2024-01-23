@@ -32,8 +32,9 @@ pipeline {
                 echo 'Artifact Push Stage'
                 script {
                     withCredentials([file(credentialsId: 'service_acc', variable: 'service_acc')]) {
-                        sh "echo '\$(cat \$service_acc)' | docker login -u _json_key --password-stdin https://asia-south1-docker.pkg.dev"
+                        // sh "echo '\$(cat \$service_acc)' | docker login -u _json_key --password-stdin https://asia-south1-docker.pkg.dev"
                         // sh "gcloud auth activate-service-account --key-file=echo \$service_acc"
+                        sh "docker login -u _json_key --password-stdin https://asia-south1-docker.pkg.dev < \$service_acc"
                         sh "docker push ${ver}"
                     }
                 }

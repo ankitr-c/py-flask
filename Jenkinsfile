@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    environment {
-        ver = ''
-    }
+    // environment {
+    //     ver = ''
+    // }
     stages {
         stage('Clone Stage') {
             steps {
@@ -13,8 +13,8 @@ pipeline {
         stage('Build Stage') {
             steps {
                 echo 'Build Stage'
-                ver = readFile('version').trim()
                 script {
+                    ver = readFile('version').trim()
                     sh "docker build -t ${ver} ."
                 }
             }

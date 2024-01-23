@@ -14,13 +14,18 @@ pipeline {
             steps {
                 echo 'Build Stage'
                 ver = readFile('version').trim()
-                sh "docker build -t ${ver} ."
+                script {
+                    sh "docker build -t ${ver} ."
+                }
             }
         }
-
         stage('Artifact Push Stage') {
-            echo 'Artifact Push Stage'
-            sh "docker push ${ver}"
+            steps {
+                echo 'Artifact Push Stage'
+                script {
+                    sh "docker push ${ver}"
+                }
+            }
         }
     }
 }

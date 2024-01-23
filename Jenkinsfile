@@ -2,8 +2,10 @@ pipeline{
     agent any
     stages{
         stage("clone"){
-            echo "Hello World"
-            sh "docker buildx build -t py-app ."
+            step{
+                echo "Hello World"
+                sh "docker buildx build -t py-app ."
+            }
         }
     }
 

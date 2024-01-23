@@ -19,11 +19,22 @@ pipeline {
                 }
             }
         }
+        // stage('Artifact Push Stage') {
+        //     steps {
+        //         echo 'Artifact Push Stage'
+        //         script {
+        //             sh "docker push ${ver}"
+        //         }
+        //     }
+        // }
         stage('Artifact Push Stage') {
             steps {
                 echo 'Artifact Push Stage'
                 script {
-                    sh "docker push ${ver}"
+                    withCredentials([file(credentialsId: 'service_acc', variable: 'service_acc')]) {
+                        sh "docker login -u _json_key -p '\$(cat \$SERVICE_ACCOUNT_KEY)' https://asia-south1-docker.pkg.dev"
+                        sh "docker push ${ver}"
+                    }
                 }
             }
         }

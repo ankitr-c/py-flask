@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World From Jenkins CI/CD..!'
+    return 'Hello, World From Jenkins CI/CD...!'
 
 
 if __name__ == "__main__":

@@ -10,10 +10,10 @@ pipeline {
             stage('Build') {
                 steps {
                     echo 'Build Stage'
-                    script {
-                        ver = readFile('version2').trim()
-                        sh "sudo docker buildx build -t ${ver} ."
-                    }
+                    // script {
+                    //     ver = readFile('version2').trim()
+                    //     sh "sudo docker buildx build -t ${ver} ."
+                    // }
                 }
             }
             stage('Deploy') {

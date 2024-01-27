@@ -12,7 +12,7 @@ pipeline {
                     echo 'Build Stage'
                     script {
                         ver = readFile('version2').trim()
-                        sh "docker build -t ${ver} ."
+                        sh "sudo docker build -t ${ver} ."
                     }
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
                 steps {
                     echo 'Deploy Stage'
                     script {
-                        sh 'docker-compose down && docker-compose up -d'
+                        sh 'sudo docker-compose down && docker-compose up -d'
                     }
                 }
             }

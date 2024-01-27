@@ -11,7 +11,10 @@ pipeline {
                 steps {
                     echo 'Clean Stage'
                     script {
-                        sh 'sudo docker rmi application_app'
+                        sh '''
+                        sudo docker-compose down
+                        sudo docker rmi application_app
+                        '''
                     }
                 }
             }
@@ -19,7 +22,7 @@ pipeline {
                 steps {
                     echo 'Deploy Stage'
                     script {
-                        sh 'sudo docker-compose down && sudo docker-compose up -d'
+                        sh 'sudo docker-compose up -d'
                     }
                 }
             }

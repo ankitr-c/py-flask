@@ -6,14 +6,13 @@ pipeline {
                 echo 'Clone Stage'
                 git branch: 'main', credentialsId: 'git-pat', url: 'https://github.com/ankitr-c/py-flask.git'
             }
-            }
-            stage('Build') {
+        }
+            stage('Clean') {
                 steps {
-                    echo 'Build Stage'
-                    // script {
-                    //     ver = readFile('version2').trim()
-                    //     sh "sudo docker buildx build -t ${ver} ."
-                    // }
+                    echo 'Clean Stage'
+                    script {
+                        sh 'sudo docker rmi application_app'
+                    }
                 }
             }
             stage('Deploy') {

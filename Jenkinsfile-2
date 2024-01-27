@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone') {
+            steps {
+                echo 'Clone Stage'
+                git branch: 'main', credentialsId: 'git-pat', url: 'https://github.com/ankitr-c/py-flask.git'
+            }
+            }
+            stage('Build') {
+                steps {
+                    echo 'Build Stage'
+                    script {
+                        ver = readFile('version').trim()
+                        sh "docker build -t ${ver} ."
+                    }
+                }
+            }
+            stage('Deploy') {
+                steps {
+                    echo 'Deploy Stage'
+                    script {
+                        sh 'docker-compose down && docker-compose up -d'
+                    }
+                }
+            }
+    }
+}

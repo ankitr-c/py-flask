@@ -11,7 +11,7 @@ pipeline {
                 steps {
                     echo 'Build Stage'
                     script {
-                        ver = readFile('version').trim()
+                        ver = readFile('version2').trim()
                         sh "docker build -t ${ver} ."
                     }
                 }
